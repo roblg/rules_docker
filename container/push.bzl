@@ -103,7 +103,7 @@ def _impl(ctx):
                 ] + image.get("blobsum", []) + image.get("zipped_layer", []) +
                 stamp_inputs + ([image["legacy"]] if image.get("legacy") else []) +
                 ([ctx.file.cacerts] if ctx.file.cacerts else []) +
-                list(ctx.attr._pusher.default_runfiles.files),
+                ctx.attr._pusher.default_runfiles.files.to_list(),
     )
 
     return struct(
